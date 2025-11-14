@@ -1,0 +1,92 @@
+{
+  "cookies": [
+    {
+      "name": "_GRECAPTCHA",
+      "value": "09ADiQh0ezb5t-6uLv_PZTvH5Pl1cpiIbcKrQTqTBKQQzsKNJYLVQY3BEtJpmFr2IomX7ASp_IZ88g-XYNIAl-xo8",
+      "domain": "www.google.com",
+      "path": "/recaptcha",
+      "expires": 1778703273.024451,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "g_token",
+      "value": "s%3Azidw5h5r34S0ftFfhWBo_VeMs48lnsoV.2lP3LQrhXnuszGWB33xPQtNUceiPhSa3LfOmcLVy618",
+      "domain": "allpanel777.now",
+      "path": "/",
+      "expires": 1763237673.474375,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "__cf_bm",
+      "value": "BY_WI8rw6fZ0EKl6yNEQNG2Hp1pmvztmm7NgqX2BTpI-1763151254-1.0.1.1-4jqjfxrFPKvBVTMaEvpsiKd1D0Dmh5sEEAzChRUzslGMIMZHfcarogy60RpblJiJ6TFV48_Iil_wY.edR_e6dGz3ZtE_H0dCRgUP_DYqVAA",
+      "domain": ".allpanel777.now",
+      "path": "/",
+      "expires": 1763153054.685641,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "cf_clearance",
+      "value": "cneuWgVcEzQgC9cXXa4hQilDPl8gpEtwYa3LwtiWHRk-1763151260-1.2.1.1-2_0oFwDvDWVdGVzouUJx831.N.S3QnVP_O_TERTGjnClUmzHQDorhuKUxO1snnOttT6dQCCGi7Ct1VUP61P1PmfnLJs3GRnHVJ4277SiK6DRXegSO.ZQRn8FWlfd8OZKYhhexATbyrF4P.lRdOrLNlVmmaubCJTtujiGR0KRoMT2S_3sh5qS0GST_y38ENyQrYqEKWbTm53QLPSc4NuWr90WEET0m0sDCKK5npgSGF0",
+      "domain": ".allpanel777.now",
+      "path": "/",
+      "expires": 1794687260.674577,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None",
+      "partitionKey": "https://allpanel777.now",
+      "_crHasCrossSiteAncestor": false
+    },
+    {
+      "name": "token",
+      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrYWwzNjMiLCJzZXNzaW9uSWQiOiI5MmI1NjdiYS00NjI3LTQ0NDUtODc5Yy03NjdjYThkMmRjOGUiLCJpYXQiOjE3NjMxNTEyNzMsImV4cCI6MTc2MzE1MzM3M30.0m6mw1oWWmMuKXgMF871NfbT5yVwnREX6TMx33OpHX4",
+      "domain": "allpanel777.now",
+      "path": "/",
+      "expires": 1763153373.474192,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Strict"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "https://allpanel777.now",
+      "localStorage": [
+        {
+          "name": "token",
+          "value": "e8940f62-a8c7-4122-b170-5a0656235e17"
+        },
+        {
+          "name": "isLoggedin",
+          "value": "true"
+        },
+        {
+          "name": "userDetails",
+          "value": "{\"isDemoUser\":false,\"token\":\"e8940f62-a8c7-4122-b170-5a0656235e17\",\"curr\":\"pts\",\"uname\":\"kal363\",\"ptype\":1,\"login\":true,\"rdisplay\":false,\"ipop\":false,\"auth\":0,\"currency\":\"INR\",\"agmno\":\"\",\"agmno1\":\"\"}"
+        },
+        {
+          "name": "_grecaptcha",
+          "value": "09ADiQh0dffvw4W1MXQObA_c80JLk66VAToecZySpbgTFdLGhxLPn7GO3CaE5BgyCN1u5niH2i6X9VH65VdAHXCt1Rkh_dTBWEID4bs15YVtksdznykAU7zEdlv84dWHcz"
+        }
+      ]
+    },
+    {
+      "origin": "https://www.google.com",
+      "localStorage": [
+        {
+          "name": "rc::a",
+          "value": "MXlrbHpoaXhudGpsNg=="
+        },
+        {
+          "name": "rc::f",
+          "value": "0aAHOjC58q8KXf-N0WY_vlG5RSeFEBon4UMbApJnmrmjKVQ2vMoXnCCVDdJ_6R59Gerasxnr8"
+        }
+      ]
+    }
+  ]
+}

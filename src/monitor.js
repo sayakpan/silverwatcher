@@ -1,0 +1,44 @@
+import { ensureLoggedIn, loginWithModal } from './login-modal.js';
+import { openDiam11Frame } from './open-game.js';
+import { scrapeContestsFromFrame } from './scrape-contests.js';
+import { loadKnownContests, saveKnownContests } from './storage.js';
+import { notifyNewContests } from './notifier.js';
+
+export async function monitorOnce({ page, env, selectors }) {
+    const baseUrl = env.BASE_URL || 'https://allpanel777.now/';
+    const username = env.USERNAME;
+    const password = env.PASSWORD;
+
+    if (!username || !password) {
+        throw new Error('USERNAME or PASSWORD missing in .env');
+    }
+
+    console.log('Silverwatcher: starting monitorOnce');
+    console.log('Base URL:', baseUrl);
+
+    try {
+        await ensureLoggedIn(page, baseUrl, selectors, username, password);
+        console.log('Silverwatcher: LOGGED IN successfully');
+
+        const frame = await openDiam11Frame(page, selectors);
+        console.log('Silverwatcher: DIAM11 frame ready, scraping contests');
+
+        const contests = await scrapeContestsFromFrame(frame, selectors);
+
+        const { knownIds } = await loadKnownContests();
+        const currentIds = new Set(contests.map(c => c.id));
+        const newContests = contests.filter(c => !knownIds.has(c.id));
+
+        if (newContests.length > 0) {
+            console.log(`Silverwatcher: ${newContests.length} new contests found`);
+            await notifyNewContests(newContests, env);
+        } else {
+            console.log('Silverwatcher: No New Contests');
+        }
+
+        await saveKnownContests(currentIds);
+    } catch (err) {
+        console.error('Silverwatcher: monitorOnce error:', err);
+        throw err;
+    }
+}
