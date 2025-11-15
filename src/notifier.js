@@ -1,7 +1,7 @@
 // src/notify.js
 import fetch from 'node-fetch';
 
-export async function sendTelegramMessage(text, env) {
+export async function sendTelegramMessage(text, env, parse_mode = 'Markdown') {
     const botToken = env.TELEGRAM_BOT_TOKEN;
     const chatId = env.TELEGRAM_CHAT_ID;
 
@@ -21,7 +21,7 @@ export async function sendTelegramMessage(text, env) {
             body: JSON.stringify({
                 chat_id: chatId,
                 text,
-                // parse_mode: 'Markdown'
+                parse_mode: parse_mode ? parse_mode : '',
             })
         });
 
@@ -73,5 +73,5 @@ export async function notifyError(error, env, contextLabel = 'runtime') {
 
     const text = parts.join('\n');
     console.error('Silverwatcher error:', err);
-    await sendTelegramMessage(text, env);
+    await sendTelegramMessage(text, env, parse_mode=false);
 }

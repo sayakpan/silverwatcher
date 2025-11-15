@@ -185,5 +185,5 @@ export async function ensureLoggedIn(page, baseUrl, selectors, username, passwor
     await loginWithModal(page, baseUrl, selectors, username, password);
 
     // Optionally persist cookies for reuse (not required for your loop, but fine to keep)
-    await page.context().storageState({ path: 'auth/state.json' });
+    await page.context().storageState({ path: 'auths/states.json' });
 }
