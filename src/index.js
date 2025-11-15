@@ -2,6 +2,7 @@ import 'dotenv/config';
 import { chromium } from 'playwright';
 import { monitorOnce } from './monitor.js';
 import { readJSON, sleep } from './util.js';
+import { notifyError } from './notifier.js';
 
 async function main() {
     const HEADLESS = String(process.env.HEADLESS || 'false') === 'true';

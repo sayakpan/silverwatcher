@@ -21,7 +21,7 @@ async function sendTelegramMessage(text, env) {
             body: JSON.stringify({
                 chat_id: chatId,
                 text,
-                parse_mode: 'Markdown'
+                // parse_mode: 'Markdown'
             })
         });
 
@@ -47,10 +47,10 @@ export async function notifyNewContests(newContests, env) {
     }
 
     const lines = newContests.map(c => {
-        return `• [${c.id}] *${c.matchType}* ${c.teamLeft} vs ${c.teamRight} (${c.timeLeft})\n${c.href}`;
+        return `• *${c.matchType}* ${c.teamLeft} vs ${c.teamRight} [#${c.id}] `;
     });
 
-    const text = `*Silverwatcher – New contests detected:*\n\n${lines.join('\n\n')}`;
+    const text = `*New Contests Detected:*\n\n${lines.join('\n\n')}`;
     await sendTelegramMessage(text, env);
 }
 

@@ -2,40 +2,40 @@
   "cookies": [
     {
       "name": "_GRECAPTCHA",
-      "value": "09ADiQh0ezb5t-6uLv_PZTvH5Pl1cpiIbcKrQTqTBKQQzsKNJYLVQY3BEtJpmFr2IomX7ASp_IZ88g-XYNIAl-xo8",
+      "value": "09ADiQh0cJQzsH5DLKXfcJ0fqBXVryLjkwjBsoic7noarfIuru51VKCxImPUgKzXc3-x4Eil0bJ36CGxgGrNMeC7s",
       "domain": "www.google.com",
       "path": "/recaptcha",
-      "expires": 1778703273.024451,
+      "expires": 1778704743.357604,
       "httpOnly": true,
       "secure": true,
       "sameSite": "None"
     },
     {
       "name": "g_token",
-      "value": "s%3Azidw5h5r34S0ftFfhWBo_VeMs48lnsoV.2lP3LQrhXnuszGWB33xPQtNUceiPhSa3LfOmcLVy618",
+      "value": "s%3Ayw1DaJTF-bpaP4Rtp2BOk0YJrUFKFcw1.hT6xupqJutn46Nfo1FTQrXMMuqpAdDpdQD55V8xkzJw",
       "domain": "allpanel777.now",
       "path": "/",
-      "expires": 1763237673.474375,
+      "expires": 1763239143.694071,
       "httpOnly": true,
       "secure": true,
       "sameSite": "Lax"
     },
     {
       "name": "__cf_bm",
-      "value": "BY_WI8rw6fZ0EKl6yNEQNG2Hp1pmvztmm7NgqX2BTpI-1763151254-1.0.1.1-4jqjfxrFPKvBVTMaEvpsiKd1D0Dmh5sEEAzChRUzslGMIMZHfcarogy60RpblJiJ6TFV48_Iil_wY.edR_e6dGz3ZtE_H0dCRgUP_DYqVAA",
+      "value": "PWhnDSXOVM9mq084VvE_g7joX2LoKsrol_NX3uGDeQY-1763152722-1.0.1.1-r5.Ya.zXFjTlyNUFT_w0lvM_kiVS_BbUDOTh5CXbjiaAKnCYm1U1T4q4n5YMZtA9.xXYZJl._ffrd2KJpjhdNqxvWBXenlDnWJiJom_zqVk",
       "domain": ".allpanel777.now",
       "path": "/",
-      "expires": 1763153054.685641,
+      "expires": 1763154522.662839,
       "httpOnly": true,
       "secure": true,
       "sameSite": "None"
     },
     {
       "name": "cf_clearance",
-      "value": "cneuWgVcEzQgC9cXXa4hQilDPl8gpEtwYa3LwtiWHRk-1763151260-1.2.1.1-2_0oFwDvDWVdGVzouUJx831.N.S3QnVP_O_TERTGjnClUmzHQDorhuKUxO1snnOttT6dQCCGi7Ct1VUP61P1PmfnLJs3GRnHVJ4277SiK6DRXegSO.ZQRn8FWlfd8OZKYhhexATbyrF4P.lRdOrLNlVmmaubCJTtujiGR0KRoMT2S_3sh5qS0GST_y38ENyQrYqEKWbTm53QLPSc4NuWr90WEET0m0sDCKK5npgSGF0",
+      "value": "JRzK6oISNeZHJHPCCdhPc36zcrUyyjsSuhBfwAbN3Dk-1763152727-1.2.1.1-..YvX1ANuHqu2AC1rA_MGa.j1wWRyATG0I09gm0HR2BzvrvQk34T6QYgYn6CprV.hcSfmMec2.qP6Itt4_TLHWN9daOF.XN3MQxMNR.kkuJglIBPTt5WuWjn7i8jm553VaBzAkego_mtlcTpwY0cbGUNzsWrtnl1fbXQb5iMbbTDzflGNQUZ_bVUp8gSkGUCiDeJuLOFCjornKrPQj4NywVWCL296k0BWESU6.vOdmI",
       "domain": ".allpanel777.now",
       "path": "/",
-      "expires": 1794687260.674577,
+      "expires": 1794688727.114868,
       "httpOnly": true,
       "secure": true,
       "sameSite": "None",
@@ -44,10 +44,10 @@
     },
     {
       "name": "token",
-      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrYWwzNjMiLCJzZXNzaW9uSWQiOiI5MmI1NjdiYS00NjI3LTQ0NDUtODc5Yy03NjdjYThkMmRjOGUiLCJpYXQiOjE3NjMxNTEyNzMsImV4cCI6MTc2MzE1MzM3M30.0m6mw1oWWmMuKXgMF871NfbT5yVwnREX6TMx33OpHX4",
+      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJrYWwzNjMiLCJzZXNzaW9uSWQiOiI4YWE3OGE5MC1hMjc2LTQ3NmMtOWFhMy00YjFkNDZkZmRjNjciLCJpYXQiOjE3NjMxNTI3NDMsImV4cCI6MTc2MzE1NDg0M30.ePPwJt30O4hFcd7VoV7Rm4OR1_vVOvcCjkKsj-tC_2I",
       "domain": "allpanel777.now",
       "path": "/",
-      "expires": 1763153373.474192,
+      "expires": 1763154843.693901,
       "httpOnly": true,
       "secure": true,
       "sameSite": "Strict"
@@ -59,7 +59,7 @@
       "localStorage": [
         {
           "name": "token",
-          "value": "e8940f62-a8c7-4122-b170-5a0656235e17"
+          "value": "29267439-0c72-4700-8c67-91000457c7d0"
         },
         {
           "name": "isLoggedin",
@@ -67,11 +67,11 @@
         },
         {
           "name": "userDetails",
-          "value": "{\"isDemoUser\":false,\"token\":\"e8940f62-a8c7-4122-b170-5a0656235e17\",\"curr\":\"pts\",\"uname\":\"kal363\",\"ptype\":1,\"login\":true,\"rdisplay\":false,\"ipop\":false,\"auth\":0,\"currency\":\"INR\",\"agmno\":\"\",\"agmno1\":\"\"}"
+          "value": "{\"isDemoUser\":false,\"token\":\"29267439-0c72-4700-8c67-91000457c7d0\",\"curr\":\"pts\",\"uname\":\"kal363\",\"ptype\":1,\"login\":true,\"rdisplay\":false,\"ipop\":false,\"auth\":0,\"currency\":\"INR\",\"agmno\":\"\",\"agmno1\":\"\"}"
         },
         {
           "name": "_grecaptcha",
-          "value": "09ADiQh0dffvw4W1MXQObA_c80JLk66VAToecZySpbgTFdLGhxLPn7GO3CaE5BgyCN1u5niH2i6X9VH65VdAHXCt1Rkh_dTBWEID4bs15YVtksdznykAU7zEdlv84dWHcz"
+          "value": "09ADiQh0cO6j1I26FihlXBy9wvOZ6GYkcCiPi44ucsnLy0upjU9D8hESenH-mF5oODJbEudmKUxGdE1Fn7-1E8UNe6ciud1_Z__TrFxIpC_2JfNYoEmT8LfXoopKEG-my0"
         }
       ]
     },
@@ -80,11 +80,11 @@
       "localStorage": [
         {
           "name": "rc::a",
-          "value": "MXlrbHpoaXhudGpsNg=="
+          "value": "MXNhdW95dXU2MjloaQ=="
         },
         {
           "name": "rc::f",
-          "value": "0aAHOjC58q8KXf-N0WY_vlG5RSeFEBon4UMbApJnmrmjKVQ2vMoXnCCVDdJ_6R59Gerasxnr8"
+          "value": "0aAHOjC5-fFbUk2HNKmhYcmIGDDBjwCNxh64_hIo2R_gfKF97rZqbyg2Xh1sToobLhE0Fea78"
         }
       ]
     }

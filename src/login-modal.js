@@ -42,7 +42,7 @@ export async function loginWithModal(page, baseUrl, selectors, username, passwor
 
     await page.goto(baseUrl, { waitUntil: 'load' });
     await sleep(500);
-    await page.waitForLoadState('networkidle', { timeout: 10000 }).catch(() => {});
+    await page.waitForLoadState('networkidle', { timeout: 10000 }).catch(() => { });
 
     let modal = page.locator(s.modalRoot).first();
     let modalVisible = await modal.isVisible().catch(() => false);
@@ -51,7 +51,7 @@ export async function loginWithModal(page, baseUrl, selectors, username, passwor
         for (const t of s.triggers) {
             const cand = page.locator(t).first();
             if (await cand.isVisible().catch(() => false)) {
-                await cand.click({ timeout: 5000 }).catch(() => {});
+                await cand.click({ timeout: 5000 }).catch(() => { });
                 await sleep(300);
                 modalVisible = await modal.isVisible().catch(() => false);
                 if (modalVisible) break;
@@ -65,7 +65,16 @@ export async function loginWithModal(page, baseUrl, selectors, username, passwor
         modalVisible = await modal.isVisible().catch(() => false);
     }
 
-    if (!modalVisible) throw new Error('login_modal_not_visible');
+    if (!modalVisible) {
+        try {
+            await page.screenshot({
+                path: `debug/login-modal-not-visible-${Date.now()}.png`,
+                fullPage: true
+            });
+            console.error('Saved debug screenshot for login_modal_not_visible');
+        } catch { }
+        throw new Error('login_modal_not_visible');
+    }
 
     const form = modal.locator(s.form).first();
     await form.waitFor({ state: 'visible', timeout: 15000 });
@@ -97,7 +106,7 @@ export async function loginWithModal(page, baseUrl, selectors, username, passwor
     if (s.ageCheckbox) {
         const age = form.locator(s.ageCheckbox).first();
         if (await age.isVisible().catch(() => false)) {
-            await age.check().catch(() => {});
+            await age.check().catch(() => { });
         }
     }
 
@@ -114,13 +123,13 @@ export async function loginWithModal(page, baseUrl, selectors, username, passwor
                 break;
             }
         }
-        await passInput.focus().catch(() => {});
-        await passInput.press('Tab').catch(() => {});
+        await passInput.focus().catch(() => { });
+        await passInput.press('Tab').catch(() => { });
         await sleep(150);
     }
 
     if (enabled) {
-        await submitBtn.click({ timeout: 8000 }).catch(() => {});
+        await submitBtn.click({ timeout: 8000 }).catch(() => { });
     } else {
         await page.evaluate(() => {
             const formEl = document.querySelector('#login .login-form') || document.querySelector('.login-form');
@@ -131,13 +140,13 @@ export async function loginWithModal(page, baseUrl, selectors, username, passwor
     }
 
     await Promise.race([
-        modal.waitFor({ state: 'hidden', timeout: 8000 }).catch(() => {}),
-        page.locator(s.postLoginSentinel).first().waitFor({ state: 'visible', timeout: 8000 }).catch(() => {})
+        modal.waitFor({ state: 'hidden', timeout: 8000 }).catch(() => { }),
+        page.locator(s.postLoginSentinel).first().waitFor({ state: 'visible', timeout: 8000 }).catch(() => { })
     ]);
 
     await sleep(5000);
     for (let i = 0; i < 3; i++) {
-        await page.keyboard.press('Escape').catch(() => {});
+        await page.keyboard.press('Escape').catch(() => { });
         await sleep(400);
     }
 
@@ -157,7 +166,7 @@ export async function ensureLoggedIn(page, baseUrl, selectors, username, passwor
     // 1) Hit the base URL and see where we land
     await page.goto(baseUrl, { waitUntil: 'load' });
     await sleep(500);
-    await page.waitForLoadState('networkidle', { timeout: 10000 }).catch(() => {});
+    await page.waitForLoadState('networkidle', { timeout: 10000 }).catch(() => { });
 
     const currentUrl = page.url();
     const urlObj = new URL(currentUrl);
