@@ -1,7 +1,7 @@
 // src/notify.js
 import fetch from 'node-fetch';
 
-async function sendTelegramMessage(text, env) {
+export async function sendTelegramMessage(text, env) {
     const botToken = env.TELEGRAM_BOT_TOKEN;
     const chatId = env.TELEGRAM_CHAT_ID;
 

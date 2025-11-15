@@ -2,7 +2,7 @@ import 'dotenv/config';
 import { chromium } from 'playwright';
 import { monitorOnce } from './monitor.js';
 import { readJSON, sleep } from './util.js';
-import { notifyError } from './notifier.js';
+import { notifyError, sendTelegramMessage } from './notifier.js';
 
 async function main() {
     const HEADLESS = String(process.env.HEADLESS || 'false') === 'true';
@@ -10,6 +10,8 @@ async function main() {
     const selectors = readJSON('config/selectors.json');
 
     console.log('Launching browser. Headless =', HEADLESS);
+    const text = `*Watcher Started*`;
+    await sendTelegramMessage(text, process.env);
 
     const browser = await chromium.launch({
         headless: HEADLESS,
@@ -40,6 +42,8 @@ async function main() {
     } finally {
         console.log('Closing browser (process ending)');
         await browser.close();
+        const text = `*Watcher Stopped:*`;
+        await sendTelegramMessage(text, process.env);
     }
 }
 
