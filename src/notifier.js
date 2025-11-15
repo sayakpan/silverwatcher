@@ -73,5 +73,5 @@ export async function notifyError(error, env, contextLabel = 'runtime') {
 
     const text = parts.join('\n');
     console.error('Silverwatcher error:', err);
-    await sendTelegramMessage(text, env, false);
+    // await sendTelegramMessage(text, env, false);
 }
