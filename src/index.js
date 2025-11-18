@@ -3,6 +3,7 @@ import { chromium } from 'playwright';
 import { monitorOnce } from './monitor.js';
 import { readJSON, sleep } from './util.js';
 import { notifyError, sendTelegramMessage } from './notifier.js';
+import { startStatusBot } from './status-bot.js';
 
 async function main() {
     const HEADLESS = String(process.env.HEADLESS || 'false') === 'true';
@@ -23,6 +24,11 @@ async function main() {
     });
 
     const page = await context.newPage();
+
+    // fire-and-forget status bot
+    startStatusBot(process.env).catch(err => {
+        console.error('Status bot crashed:', err);
+    });
 
     try {
         while (true) {

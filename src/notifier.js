@@ -3,32 +3,44 @@ import fetch from 'node-fetch';
 
 export async function sendTelegramMessage(text, env, parse_mode = 'Markdown') {
     const botToken = env.TELEGRAM_BOT_TOKEN;
-    const chatId = env.TELEGRAM_CHAT_ID;
+    let chatIds = [];
+    if (env.TELEGRAM_CHAT_IDS) {
+        chatIds = env.TELEGRAM_CHAT_IDS
+            .split(',')
+            .map(id => id.trim())
+            .filter(Boolean);
+    }
 
-    if (!botToken || !chatId) {
-        console.error('Telegram not configured: missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_ID');
+    if (!botToken || chatIds.length === 0) {
+        console.error('Telegram not configured: missing TELEGRAM_BOT_TOKEN or TELEGRAM_CHAT_IDS');
         return;
     }
 
     const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
 
     try {
-        const res = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                chat_id: chatId,
-                text,
-                parse_mode: parse_mode ? parse_mode : '',
+        const tasks = chatIds.map(chatId =>
+            fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text,
+                    parse_mode: parse_mode || '',
+                })
             })
-        });
+                .then(res => res.json())
+                .then(data => {
+                    if (!data.ok) {
+                        console.error(`Failed for ${chatId}:`, data);
+                    }
+                })
+                .catch(err => {
+                    console.error(`Telegram send error for ${chatId}:`, err.message || err);
+                })
+        );
 
-        const data = await res.json();
-        if (!res.ok || !data.ok) {
-            console.error('Telegram sendMessage failed:', data);
-        }
+        await Promise.all(tasks);
     } catch (err) {
         console.error('Telegram sendMessage error:', err.message || err);
     }

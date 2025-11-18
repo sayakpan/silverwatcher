@@ -3,6 +3,7 @@ import { openDiam11Frame } from './open-game.js';
 import { scrapeContestsFromFrame } from './scrape-contests.js';
 import { loadKnownContests, saveKnownContests } from './storage.js';
 import { notifyNewContests } from './notifier.js';
+import { markRunError, markRunStart, markRunSuccess } from './status-state.js';
 
 export async function monitorOnce({ page, env, selectors }) {
     const baseUrl = env.BASE_URL || 'https://allpanel777.now/';
@@ -16,6 +17,8 @@ export async function monitorOnce({ page, env, selectors }) {
     console.log('Silverwatcher: starting monitorOnce');
     console.log('Base URL:', baseUrl);
 
+    markRunStart();
+
     try {
         await ensureLoggedIn(page, baseUrl, selectors, username, password);
         console.log('Silverwatcher: LOGGED IN successfully');
@@ -24,6 +27,7 @@ export async function monitorOnce({ page, env, selectors }) {
         console.log('Silverwatcher: DIAM11 frame ready, scraping contests');
 
         const contests = await scrapeContestsFromFrame(frame, selectors);
+        console.log(`Silverwatcher: scraped ${contests.length} contests`);
 
         const { knownIds } = await loadKnownContests();
         const currentIds = new Set(contests.map(c => c.id));
@@ -37,7 +41,9 @@ export async function monitorOnce({ page, env, selectors }) {
         }
 
         await saveKnownContests(currentIds);
+        markRunSuccess(newContests.length);
     } catch (err) {
+        markRunError(err);
         console.error('Silverwatcher: monitorOnce error:', err);
         throw err;
     }
