@@ -14,3 +14,10 @@ export function readJSON(p) {
     const raw = fs.readFileSync(abs, 'utf-8');
     return JSON.parse(raw);
 }
+
+export function nowIST() {
+    return new Date().toLocaleString('en-IN', {
+        timeZone: 'Asia/Kolkata',
+        hour12: true
+    });
+}

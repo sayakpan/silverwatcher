@@ -1,4 +1,4 @@
-import { sleep } from './util.js';
+import { nowIST, sleep } from './util.js';
 
 function ensureString(name, v) {
     if (typeof v !== 'string' || !v.trim()) {
@@ -68,7 +68,7 @@ export async function loginWithModal(page, baseUrl, selectors, username, passwor
     if (!modalVisible) {
         try {
             await page.screenshot({
-                path: `debug/login-modal-not-visible-${Date.now()}.png`,
+                path: `debug/login-modal-not-visible-${nowIST()}.png`,
                 fullPage: true
             });
             console.error('Saved debug screenshot for login_modal_not_visible');
@@ -155,6 +155,28 @@ export async function loginWithModal(page, baseUrl, selectors, username, passwor
 }
 
 
+async function isAlreadyLoggedIn(page, baseUrl, selectors) {
+    const normalizedBase = baseUrl.endsWith('/')
+        ? baseUrl.slice(0, -1)
+        : baseUrl;
+
+    const url = page.url();
+    const urlObj = new URL(url);
+
+    const onSport =
+        urlObj.origin === new URL(normalizedBase).origin &&
+        urlObj.pathname.startsWith('/sport');
+
+    const sentinelVisible = await page
+        .locator(selectors.login.postLoginSentinel)
+        .first()
+        .isVisible()
+        .catch(() => false);
+
+    return onSport || sentinelVisible;
+}
+
+
 export async function ensureLoggedIn(page, baseUrl, selectors, username, password) {
     if (!page) {
         throw new Error('page not provided');
@@ -168,20 +190,13 @@ export async function ensureLoggedIn(page, baseUrl, selectors, username, passwor
     await sleep(500);
     await page.waitForLoadState('networkidle', { timeout: 10000 }).catch(() => { });
 
-    const currentUrl = page.url();
-    const urlObj = new URL(currentUrl);
-
-    const isOnSport =
-        urlObj.origin === new URL(normalizedBase).origin &&
-        urlObj.pathname.startsWith('/sport');
-
-    if (isOnSport) {
+    if (await isAlreadyLoggedIn(page, baseUrl, selectors)) {
         console.log('Silverwatcher: Already logged in');
         return;
     }
 
     // 2) If we are still on "/" (or anything else), treat as logged out
-    console.log('Silverwatcher: session expired → logging in');
+    console.log('Silverwatcher: session expired → logging in',);
     await loginWithModal(page, baseUrl, selectors, username, password);
 
     // Optionally persist cookies for reuse (not required for your loop, but fine to keep)

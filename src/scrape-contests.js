@@ -5,7 +5,7 @@ export async function scrapeContestsFromFrame(frame, selectors) {
     if (!s || !s.matchListContainer) {
         throw new Error('selectors.game.matchListContainer missing');
     }
-
+    await sleep(600);
     // Wait for the list container to be visible
     await frame.locator(s.matchListContainer).first().waitFor({
         state: 'visible',

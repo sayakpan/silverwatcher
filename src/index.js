@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import { chromium } from 'playwright';
 import { monitorOnce } from './monitor.js';
-import { readJSON, sleep } from './util.js';
+import { nowIST, readJSON, sleep } from './util.js';
 import { notifyError, sendTelegramMessage } from './notifier.js';
 import { startStatusBot } from './status-bot.js';
 
@@ -33,7 +33,7 @@ async function main() {
     try {
         while (true) {
             console.log('-----------------------------');
-            console.log('Silverwatcher: new iteration at', new Date().toISOString());
+            console.log('Silverwatcher: New iteration at', nowIST());
 
             try {
                 await monitorOnce({ page, env: process.env, selectors });
