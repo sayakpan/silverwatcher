@@ -5,14 +5,22 @@ import { nowIST, readJSON, sleep } from './util.js';
 import { notifyError, sendTelegramMessage } from './notifier.js';
 import { startStatusBot } from './status-bot.js';
 
-async function main() {
-    const HEADLESS = String(process.env.HEADLESS || 'false') === 'true';
-    const INTERVAL_MS = Number(process.env.INTERVAL_MS || 10000); // 10s default
-    const selectors = readJSON('config/selectors.json');
+
+function isCrashError(err) {
+    if (!err) return false;
+    const msg = String(err.message || err);
+    return (
+        msg.includes('Page crashed') ||
+        msg.includes('Target closed') ||
+        msg.includes('browser has been closed') ||
+        msg.includes('CRASHED')
+    );
+}
+
+async function launchBrowser(env) {
+    const HEADLESS = String(env.HEADLESS || 'false') === 'true';
 
     console.log('Launching browser. Headless =', HEADLESS);
-    const text = `*Watcher Started*`;
-    await sendTelegramMessage(text, process.env);
 
     const browser = await chromium.launch({
         headless: HEADLESS,
@@ -24,6 +32,19 @@ async function main() {
     });
 
     const page = await context.newPage();
+    return { browser, context, page };
+}
+
+
+async function main() {
+    const HEADLESS = String(process.env.HEADLESS || 'false') === 'true';
+    const INTERVAL_MS = Number(process.env.INTERVAL_MS || 10000); // 10s default
+    const selectors = readJSON('config/selectors.json');
+
+    const text = `*Watcher Restarted*`;
+    await sendTelegramMessage(text, process.env);
+
+    let { browser, context, page } = await launchBrowser(process.env);
 
     // fire-and-forget status bot
     startStatusBot(process.env).catch(err => {
@@ -40,6 +61,21 @@ async function main() {
             } catch (err) {
                 await notifyError(err, process.env, 'monitorOnce');
                 console.error('Silverwatcher: monitorOnce error:', err);
+
+                if (isCrashError(err)) {
+                    console.error('Silverwatcher: CRASH DETECTED — restarting browser...');
+
+                    try {
+                        await context.close().catch(() => { });
+                        await browser.close().catch(() => { });
+                    } catch { }
+
+                    const fresh = await launchBrowser(process.env);
+                    browser = fresh.browser;
+                    context = fresh.context;
+                    page = fresh.page;
+                    console.log('Silverwatcher: Browser recreated successfully');
+                }
             }
 
             console.log(`Silverwatcher: sleeping for ${INTERVAL_MS} ms`);
